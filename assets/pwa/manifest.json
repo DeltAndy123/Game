@@ -1,0 +1,14 @@
+{
+  "name": "Game",
+  "background_color": "cyan",
+  "categories": ["games"],
+  "description": "A game that I made",
+  "display": "standalone",
+  "icons": [
+    {"src": "./48.png", "sizes": "48x48"},
+    {"src": "./800.png", "sizes": "800x800"}
+  ],
+  "orientation": "landscape",
+  "short_name": "Game",
+  "theme_color": "blue"
+}

@@ -1,0 +1,18 @@
+article {padding: 10px}
+article h1 {font-size: 2.5rem}
+article h2 {font-size: 1.5rem}
+article h3 {font-size: 1.2rem}
+article .info {color: #5c5c5c}
+
+.error h1 {
+  display: flex;
+  justify-content: center;
+}
+
+code {
+  background-color: #d6d6d6;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+main {display: none}

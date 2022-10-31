@@ -1,0 +1,30 @@
+#c {
+  position: absolute;
+  background-color: black;
+  touch-action: none;
+  width: var(--w);
+  height: var(--h);
+}
+
+#ui {
+  display: block;
+  touch-action: none;
+  position: absolute;
+  color: white;
+  width: var(--w);
+  height: var(--h);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#ui > * {
+  width: var(--w);
+  height: var(--h);
+}
+
+#ui .down:active {
+  filter: invert(50%);
+}
