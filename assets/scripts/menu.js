@@ -22,10 +22,13 @@ function main() {
         "border-radius": "5px",
         color: "black",
         "font-size": "1.5rem",
-        "background-color": "silver",
+        "background": "linear-gradient(45deg, silver, white)",
         border: "1px solid white",
       });
       e.setAttribute("class", "down");
+      e.addEventListener("pointerup", e => {
+        menu.style.display = "none";
+      });
     },
     children: [
       $$("button", {

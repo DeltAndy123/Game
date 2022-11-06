@@ -26,5 +26,32 @@
 }
 
 #ui .down:active {
-  filter: invert(50%);
+  filter: invert(30%);
+  color: white;
+}
+
+#ui .slider {
+  border: 8px inset gray;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+}
+
+#ui .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(45deg, silver, gray);
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+#ui .slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(180deg, silver, gray);
+  cursor: pointer;
 }
