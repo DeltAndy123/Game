@@ -1,9 +1,12 @@
 import {$, $$, addToGame, parseCSS} from "./util.js";
 import {play} from "./play.js";
 import {settings} from "./settings.js";
+import {inDevEl} from "./in-dev.js";
+
+var menu;
 
 function main() {
-  const menu = $$("div", {
+  menu = $$("div", {
     attrs: {style: parseCSS({
       color: "white",
       display: "flex",
@@ -33,7 +36,7 @@ function main() {
     children: [
       $$("button", {
         children: "Play",
-        up: play,
+        up() {inDevEl.style.display = "flex"},
       }),
       $$("button", {
         children: "Settings",
@@ -45,4 +48,4 @@ function main() {
   addToGame(menu, "page");
 }
 
-export {main};
+export {main, menu};
