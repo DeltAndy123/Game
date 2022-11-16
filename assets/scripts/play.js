@@ -1,5 +1,0 @@
-function play() {
-  
-}
-
-export {play};

@@ -1,5 +1,5 @@
 import {$, $$, addToGame, parseCSS} from "./util.js";
-import {play} from "./play.js";
+import {play} from "./3d/play.js";
 import {settings} from "./settings.js";
 import {inDevEl} from "./in-dev.js";
 
@@ -36,7 +36,8 @@ function main() {
     children: [
       $$("button", {
         children: "Play",
-        up() {inDevEl.style.display = "flex"},
+        //up() {inDevEl.style.display = "flex"},
+        up: play,
       }),
       $$("button", {
         children: "Settings",

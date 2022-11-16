@@ -1,5 +1,9 @@
 export function $(e) {return document.querySelector(e)}
 
+export function mderr(e = "") {
+  return new Error("MD Error: " + e);
+}
+
 export function once(e, f) {
   if(Array.isArray(e)) {
     for(const i of e) f(i);
@@ -102,4 +106,78 @@ export function parseCSS(css) {
   for(const key in css) str += `${key}:${css[key]};`;
   
   return str;
+}
+
+export function eventOnce(e, f) {
+  f();
+  addEventListener(e, f);
+}
+
+export function stopLoop(func, firstTick = true, delta = false) {
+  var go = firstTick;
+  var f = delta ? deltaLoop : loop;
+  var start;
+  var stop;
+  
+  if(delta) var lastTick = new Date.now();
+  if(go) f();
+  
+  function start() {
+    if(go) return;
+    go = true;
+    f();
+  }
+  
+  function step() {
+    if(go) {console.error(mderr(
+      "step() can't be called when "
+    + "the loop isn't stopped"
+    )); return}
+    f();
+  }
+  
+  function stop() {go = false}
+  
+  function deltaLoop() {
+    var deltas = new Date.now() - lastTick;
+    func({start, stop, step, delta: deltas});
+    if(go) requestAnimationFrame(loop);
+  }
+  
+  function loop() {
+    func({start, stop, step});
+    if(go) requestAnimationFrame(loop);
+  }
+  
+  return {start, stop, step};
+}
+
+export class TilemapText {
+  constructor(opts = {}) {
+    opts.delay ||= 0;
+    this.opts = opts;
+  }
+  
+  run(e) {
+    if(e != undefined) {
+      console.log(e);
+      _run(e);
+    } else if(opts.run != undefined) {
+      _run(opts.run);
+    }
+  }
+  
+  _run(e) {
+    var x = 0;
+    var y = 0;
+    
+    if(opts.delay == 0) {
+      for(let yo = e.length; yo != 0; yo--) {
+        y++;
+        console.log(e[yo]);
+      }
+    } else {
+      
+    }
+  }
 }
