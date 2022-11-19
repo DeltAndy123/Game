@@ -153,31 +153,88 @@ export function stopLoop(func, firstTick = true, delta = false) {
 }
 
 export class TilemapText {
+  arr = [];
+  
   constructor(opts = {}) {
     opts.delay ||= 0;
     this.opts = opts;
   }
   
   run(e) {
+    if(!Array.isArray(e)) {
+      console.error(mderr("Didn't recieve an array"));
+      return;
+    }
     if(e != undefined) {
-      console.log(e);
-      _run(e);
-    } else if(opts.run != undefined) {
-      _run(opts.run);
+      this._run(e);
+    } else if(this.opts.run != undefined) {
+      this._run(opts.run);
     }
   }
   
+  hasPre = false;
+  pref = [];
+  
+  pre(f) {
+    this.pref.push(f);
+    this.hasPre = true;
+  }
+  
+  key(txt, f) {this.arr.push([txt, f])}
+  
   _run(e) {
+    const self = this;
     var x = 0;
     var y = 0;
     
-    if(opts.delay == 0) {
-      for(let yo = e.length; yo != 0; yo--) {
-        y++;
-        console.log(e[yo]);
+    var parseCoords;
+    if(this.hasPre) {
+      parseCoords = function(obj) {
+        for(const i of this.pref)
+          obj = i(obj.x, obj.y);
+        return obj;
       }
     } else {
+      parseCoords = function(obj) {return obj}
+    }
+    
+    var stopf = false;
+    function parse(yo) {
+      yo--;
+      console.log(yo);
+      const xarr = e[yo];
+      for(let xo = 0; xo != xarr.length; xo++) {
+        x++;
+        const c = xarr[xo];
+        function check() {
+          for(const [key, f] of self.arr) {
+            if(c == key) {
+              const a = parseCoords({x, y});
+              f({x: a.x, y: a.y, stop() {stopf = true}});
+              break;
+            }
+          }
+        }
+        
+        if(stopf) break;
+      }
       
+      x = 0;
+      y++;
+    }
+    
+    if(this.opts.delay == 0) {
+      for(let yo = e.length; yo != 0; yo--) {
+        if(stopf) break;
+        parse(yo);
+      }
+    } else {
+      var time = 1;
+      for(let yo = e.length; yo != 0; yo--) {
+        if(stopf) break;
+        time++;
+        setTimeout(parse, this.opts.delay * time);
+      }
     }
   }
 }
