@@ -1,3 +1,5 @@
+export const RADIAN_HALF = 1.570796;
+
 export function $(e) {return document.querySelector(e)}
 
 export function mderr(e = "") {
@@ -131,7 +133,7 @@ export function stopLoop(func, firstTick = true, delta = false) {
   function step() {
     if(go) {console.error(mderr(
       "step() can't be called when "
-    + "the loop isn't stopped"
+    + "the loop isn't stopped @util.js"
     )); return}
     f();
   }
@@ -155,6 +157,26 @@ export function stopLoop(func, firstTick = true, delta = false) {
 export function stepLoop(f) {
   function step() {f(step)}
   return step();
+}
+
+export function rand(o = {}) {
+  return Math.floor(Math.random() * (o - 1));
+}
+
+export function randMax() {
+  return Math.floor(Math.random() * (o.max - 1)) + o.min;
+}
+
+export function randFromArr(e) {
+  return e[rand(e.length)];
+}
+
+export function clamp(min, num, max) {
+  return Math.min(Math.max(num, min), max);
+}
+
+export function randomColor() {
+  return Math.floor(Math.random() * 0xffffff);
 }
 
 export class TilemapText {
