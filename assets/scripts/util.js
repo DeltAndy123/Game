@@ -152,89 +152,76 @@ export function stopLoop(func, firstTick = true, delta = false) {
   return {start, stop, step};
 }
 
+export function stepLoop(f) {
+  function step() {f(step)}
+  return step();
+}
+
 export class TilemapText {
   arr = [];
   
   constructor(opts = {}) {
     opts.delay ||= 0;
     this.opts = opts;
+    return this;
   }
   
   run(e) {
-    if(!Array.isArray(e)) {
-      console.error(mderr("Didn't recieve an array"));
-      return;
-    }
+    if(!Array.isArray(e)) return console.error(
+      mderr("Didn't recieve an array")
+    );
+    
     if(e != undefined) {
       this._run(e);
     } else if(this.opts.run != undefined) {
       this._run(opts.run);
     }
+    
+    return this;
   }
   
   hasPre = false;
-  pref = [];
+  pre = [];
   
-  pre(f) {
-    this.pref.push(f);
+  use(f) {
+    this.pre.push(f);
     this.hasPre = true;
+    return this;
   }
   
-  key(txt, f) {this.arr.push([txt, f])}
+  runPre(o) {
+    for(const i of this.pre) i(o);
+    return this;
+  }
+  
+  key(key, f) {this.arr.push([key, f]); return this}
+  
+  check(c) {
+    for(const [key, f] of this.arr) {
+      if(key == c) {
+        f();
+        break;
+      }
+    }
+  }
   
   _run(e) {
-    const self = this;
-    var x = 0;
-    var y = 0;
-    
-    var parseCoords;
-    if(this.hasPre) {
-      parseCoords = function(obj) {
-        for(const i of this.pref)
-          obj = i(obj.x, obj.y);
-        return obj;
-      }
-    } else {
-      parseCoords = function(obj) {return obj}
+    var yLevel = e.length;
+    function parseX(layer, step) {
+      console.log(layer);
+      step();
     }
     
-    var stopf = false;
-    function parse(yo) {
-      yo--;
-      console.log(yo);
-      const xarr = e[yo];
-      for(let xo = 0; xo != xarr.length; xo++) {
-        x++;
-        const c = xarr[xo];
-        function check() {
-          for(const [key, f] of self.arr) {
-            if(c == key) {
-              const a = parseCoords({x, y});
-              f({x: a.x, y: a.y, stop() {stopf = true}});
-              break;
-            }
-          }
+    function parseY() {
+      stepLoop(step => {
+        if(yLevel != 0) {
+          yLevel--;
+          setTimeout(() => parseX(e[yLevel], step), 50);
+        } else {
+          return;
         }
-        
-        if(stopf) break;
-      }
-      
-      x = 0;
-      y++;
+      });
     }
-    
-    if(this.opts.delay == 0) {
-      for(let yo = e.length; yo != 0; yo--) {
-        if(stopf) break;
-        parse(yo);
-      }
-    } else {
-      var time = 1;
-      for(let yo = e.length; yo != 0; yo--) {
-        if(stopf) break;
-        time++;
-        setTimeout(parse, this.opts.delay * time);
-      }
-    }
+    parseY();
   }
 }
