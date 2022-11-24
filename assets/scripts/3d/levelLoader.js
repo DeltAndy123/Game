@@ -22,14 +22,29 @@ async function getLevel(name) {
   return arr;
 }
 
+var centerX = 0;
+var centerY = 0;
+
 export async function loadLevel(scene, name) {
   const level = await getLevel(name);
-  var centerX = 0;
-  var centerY = 0;
   
   const player = new TilemapText();
   player.key("@", ({x, y, stop}) => {
-    //stop();
-    console.log(x, y);
+    centerX = x;
+    centerY = y;
+    stop();
+  }).run(level);
+  
+  player.finished(() => parseLevel({level, scene}));
+}
+
+function parseLevel({level, scene}) {
+  const tilemap = new TilemapText();
+  tilemap.use(o => {
+    o.x -= centerX;
+    o.y -= centerY;
+  });
+  tilemap.key("#", ({x, y}) => {
+    
   }).run(level);
 }

@@ -197,27 +197,50 @@ export class TilemapText {
   key(key, f) {this.arr.push([key, f]); return this}
   
   check(c) {
-    for(const [key, f] of this.arr) {
-      if(key == c) {
-        f();
-        break;
-      }
-    }
+    for(const [key, f] of this.arr)
+      if(key == c) return [key, f];
+    return false;
+  }
+  
+  _finish = [];
+  
+  finished(f) {
+    this._finish.push(f);
+    return this;
   }
   
   _run(e) {
+    var end = false;
+    const self = this;
     var yLevel = e.length;
     function parseX(layer, step) {
-      console.log(layer);
+      for(let i = 0; i != layer.length; i++) {
+        const res = self.check(layer[i]);
+        if(res) {
+          const o = {y: yLevel, x: i, stop() {end = true}};
+          if(self.hasPre) self.runPre(o);
+          res[1](o);
+          if(end) {
+            for(const i of self._finish) i();
+            return;
+          }
+        }
+      }
       step();
     }
     
     function parseY() {
       stepLoop(step => {
+        if(end) {
+          for(const i of self._finish) i();
+          return;
+        }
+        
         if(yLevel != 0) {
           yLevel--;
           setTimeout(() => parseX(e[yLevel], step), 50);
         } else {
+          for(const i of self._finish) i();
           return;
         }
       });
