@@ -18,6 +18,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  pointer-events: none;
 }
 
 #ui > * {
@@ -81,4 +82,8 @@
 #ui .every-full * {
   width: 100%;
   height: 100%;
+}
+
+#ui * {
+  /*pointer-events: auto;*/
 }

@@ -1,9 +1,19 @@
 export const RADIAN_HALF = 1.570796;
 
+export function noop() {}
+
 export function $(e) {return document.querySelector(e)}
 
 export function mderr(e = "") {
   return new Error("MD Error: " + e);
+}
+
+export function checkEl(e) {
+  var a = !e;
+  if(a) console.error(mderr(
+    `Got "${e}" as an element`
+  ));
+  return a;
 }
 
 export function once(e, f) {

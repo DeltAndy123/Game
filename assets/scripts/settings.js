@@ -178,6 +178,7 @@ settingsEl = $$("table", {
     id: "settings",
     style: parseCSS({
       display: "none",
+      "pointer-events": "auto",
     }),
   },
   children: parseSettings(settingsArr),

@@ -7,7 +7,6 @@ export const renderer = new THREE.WebGLRenderer({
 });
 
 const dpi = devicePixelRatio;
-
 renderer.setPixelRatio(devicePixelRatio);
 renderer.setSize(innerWidth, innerHeight);
 eventOnce("resize", () => renderer.setSize(innerWidth, innerHeight))

@@ -20,6 +20,7 @@ const inDevEl = $$("div", {
           background: "linear-gradient(45deg, green, darkgreen)",
           color: "white",
           "font-weight": "bold",
+          "pointer-events": "auto",
         }),
       },
       children: "Return Home?",

@@ -27,6 +27,7 @@ function main() {
         "font-size": "1.5rem",
         "background": "linear-gradient(45deg, silver, white)",
         border: "1px solid white",
+        "pointer-events": "auto",
       });
       e.setAttribute("class", "down");
       e.addEventListener("pointerup", e => {
