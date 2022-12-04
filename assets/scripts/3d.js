@@ -36,7 +36,6 @@ export function updateCamera(cam, mathX, mathY) {
   q.multiply(qx);
   q.multiply(qz);
   cam.quaternion.copy(q);
-  cam.rotation.z = RADIAN_HALF;
 }
 
 export class ControlCamera {
@@ -55,6 +54,8 @@ export class ControlCamera {
     if(this.changed) {
       this.changed = false;
       updateCamera(this.camera, this.rx, this.ry);
+      /*this.camera.rotation.x = this.ry;
+      this.camera.rotation.y = this.rx;*/
     }
     requestAnimationFrame(() => this.loop());
   }
@@ -120,6 +121,13 @@ export class ControlCamera {
     );
     this.el.addEventListener("mousemove", e => this.down(e))
     this.el.addEventListener("pointerup", e => this.up(e));
+    return this;
+  }
+  
+  setDefault(cam, x, y) {
+    updateCamera(this.camera, x, y);
+    this.rx = x;
+    this.ry = y;
     return this;
   }
   

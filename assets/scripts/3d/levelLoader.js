@@ -64,7 +64,7 @@ function parseLevel({level, scene, camera, res}) {
     x *= 5;
     y *= 5;
     box.position.x = x;
-    box.position.y = y;
+    box.position.z = y;
     scene.add(box);
   }).run(level);
   tilemap.finished(res);
