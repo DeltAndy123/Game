@@ -29,8 +29,11 @@ export function setQuaternion(mathX, mathY) {
   return {qx, qz};
 }
 
+var current_qx = 0;
+
 export function updateCamera(cam, mathX, mathY) {
   const {qx, qz} = setQuaternion(mathX, mathY);
+  current_qx = qx._y;
   const q = new THREE.Quaternion();
   
   q.multiply(qx);
@@ -41,7 +44,6 @@ export function updateCamera(cam, mathX, mathY) {
 export class ControlCamera {
   rx = RADIAN_HALF;
   ry = -RADIAN_HALF;
-  changed = false;
   canPan = false;
   
   constructor(o) {
@@ -51,12 +53,7 @@ export class ControlCamera {
   }
   
   loop() {
-    if(this.changed) {
-      this.changed = false;
-      updateCamera(this.camera, this.rx, this.ry);
-      /*this.camera.rotation.x = this.ry;
-      this.camera.rotation.y = this.rx;*/
-    }
+    updateCamera(this.camera, this.rx, this.ry);
     requestAnimationFrame(() => this.loop());
   }
   
@@ -94,7 +91,6 @@ export class ControlCamera {
       this.touch.y = this.touch.ly - e.pageY;
       this.touch.lx = e.pageX;
       this.touch.ly = e.pageY;
-      this.changed = true;
       
       const sx = -this.touch.x * 0.005;
       const sy = this.touch.y * 0.005;
@@ -119,6 +115,7 @@ export class ControlCamera {
     this.el.addEventListener("touchmove", 
       e => this.move(e.touches[e.touches.length-1]),
     );
+    //this.el.addEventListener("touchmove", e => {console.log(e.touches);})
     this.el.addEventListener("mousemove", e => this.down(e))
     this.el.addEventListener("pointerup", e => this.up(e));
     return this;
@@ -137,3 +134,35 @@ export class ControlCamera {
   }
 }
 
+export class MovementCamera extends ControlCamera {
+  direction = new THREE.Vector3();
+  canMove = true;
+  constructor(o) {
+    super(o);
+  }
+  
+  onMovement = function(s) {return s};
+  
+  moveUp(s = 0.03) {
+    s = this.onMovement(s);
+    if(current_qx < -0.7
+    || current_qx > 0.7) {
+      this.camera.position.z += Math.cos(this.camera.rotation.y) * s;
+    } else {
+      this.camera.position.z -= Math.cos(this.camera.rotation.y) * s;
+    }
+    this.camera.position.x -= Math.sin(this.camera.rotation.y) * s;
+  }
+  
+  moveLeft(s = 0.03) {
+    s = this.onMovement(s);
+  }
+  
+  moveDown(s = 0.03) {
+    this.moveUp(-s);
+  }
+  
+  moveRight(s = 0.03) {
+    s = this.onMovement(s);
+  }
+}

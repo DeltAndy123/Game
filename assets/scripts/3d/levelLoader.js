@@ -59,8 +59,13 @@ function parseLevel({level, scene, camera, res}) {
     o.x -= centerX;
     o.y -= centerY;
   });
+  const cache1 = new THREE.BoxGeometry(5, 5, 5);
   tilemap.key("#", ({x, y}) => {
-    const box = newBox(5, randomColor());
+    const box = new THREE.Mesh(
+      cache1,
+      new THREE.MeshBasicMaterial({color: randomColor()}),
+    );
+    //const box = newBox(5, randomColor());
     x *= 5;
     y *= 5;
     box.position.x = x;

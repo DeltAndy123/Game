@@ -84,6 +84,9 @@
   height: 100%;
 }
 
-#ui * {
-  /*pointer-events: auto;*/
+#controls {
+  position: absolute;
+  background-color: transparent;
+  touch-action: none;
+  border: 2px solid green;
 }

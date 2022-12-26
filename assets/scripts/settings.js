@@ -2,6 +2,9 @@ import {$, $$, addToGame, parseCSS} from "./util.js";
 import {menu} from "./menu.js";
 import {inDevEl} from "./in-dev.js";
 
+const settingsObj = {
+  sensitivity: Math.round(100 * 100) / 10000 + 1,
+};
 var settingsEl;
 
 const settingsArr = [
@@ -30,11 +33,22 @@ const settingsArr = [
     name: "Controls",
     type: "button",
     change(e) {
-      console.log(e);
       settingsEl.style.display = "none";
       inDevEl.style.display = "flex";
     },
     //buttonName: "",
+  },
+  {
+    name: "Sensitivity",
+    type: "bar",
+    min: 1,
+    max: 100,
+    change(a, b) {
+      a.innerText = `Sensitivity [${b}%]`;
+      settingsObj.sensitivity = 
+      Math.round(b * 100) / 10000 + 1;
+      console.log(b)
+    },
   },
 ];
 
@@ -79,16 +93,15 @@ function parseSettings(arr = []) {
     const {name, type, change} = i;
     if(type == "bar") {
       const label = $$("td", {
-        //attrs: {class: "left"},
-        children: name + " [100%]",
+        children: name + ` [${i.max || 100}%]`,
       });
       const slider = $$("input", {
         attrs: {
           type: "range",
           name: "a",
-          min: 0,
-          max: 100,
-          value: 100,
+          min: i.min || 0,
+          max: i.max || 100,
+          value: i.max || 100,
           class: "slider",
           style: parseCSS({width: "100%", height: "100%"}),
         },
@@ -133,7 +146,6 @@ function parseSettings(arr = []) {
         },
         children: i.buttonName,
       });
-      //const el = row(label, $$("td", {children: button}));
       const el = $$("tr", {
         children: $$("td", {
           children: $$("button", {
@@ -190,4 +202,4 @@ function settings() {
   settingsEl.style.display = "block";
 }
 
-export {settings};
+export {settings, settingsObj};
