@@ -76,7 +76,7 @@ function main() {
     console.log('Pointer lock error');
   });
 
-  $("#c").requestPointerLock();
+  if ($("#c").requestPointerLock) $("#c").requestPointerLock();
   
   // Unlock pointer on escape key press
   document.addEventListener('keydown', function(e) {
