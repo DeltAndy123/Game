@@ -33,6 +33,7 @@ function main() {
   renderLoop.start();
   
   cam.onPointerMove = function(e) {
+    console.log(e.type)
     cam.rx += e.x * 0.005 * settingsObj.sensitivity;
     cam.ry = clamp(
       -Math.PI / 3,
@@ -40,6 +41,50 @@ function main() {
       Math.PI / 3,
     );
   };
+
+  let prevMouseX = 0;
+  let prevMouseY = 0;
+  
+  $("#c").addEventListener('mousemove', function(e) {
+    cam.rx += e.movementX * -0.005 * settingsObj.sensitivity;
+    cam.ry = clamp(
+      -Math.PI / 3,
+      cam.ry + e.movementY * -0.005 * settingsObj.sensitivity,
+      Math.PI / 3,
+    );
+  
+    // Store current mouse position for next time
+    prevMouseX = e.clientX;
+    prevMouseY = e.clientY;
+  });
+  // Set up pointer lock
+  document.addEventListener('click', function(e) {
+    $("#c").requestPointerLock();
+  });
+  
+  document.addEventListener('pointerlockchange', function(e) {
+    if (document.pointerLockElement === $("#c")) {
+      // Pointer lock was acquired
+      console.log('Pointer lock acquired');
+    } else {
+      // Pointer lock was lost
+      console.log('Pointer lock lost');
+    }
+  });
+  
+  document.addEventListener('pointerlockerror', function(e) {
+    console.log('Pointer lock error');
+  });
+
+  $("#c").requestPointerLock();
+  
+  // Unlock pointer on escape key press
+  document.addEventListener('keydown', function(e) {
+    if (e.code === "Escape") {
+      // Escape key was pressed
+      document.exitPointerLock();
+    }
+  });
   
   cam.onMovement = s => s;
   
@@ -61,6 +106,22 @@ function addControls() {
   });
   
   const controls = $("#ui > #controls");
+
+  const keyboardDown = document.addEventListener("keydown", (e) => {
+    controls.style.display = "none"
+    if (e.code == "KeyW" || e.code == "ArrowUp") moving.up = true
+    if (e.code == "KeyA" || e.code == "ArrowLeft") moving.left = true
+    if (e.code == "KeyS" || e.code == "ArrowDown") moving.down = true
+    if (e.code == "KeyD" || e.code == "ArrowRight") moving.right = true
+  })
+
+  const keyboardUp = document.addEventListener("keyup", (e) => {
+    if (e.code == "KeyW" || e.code == "ArrowUp") moving.up = false
+    if (e.code == "KeyA" || e.code == "ArrowLeft") moving.left = false
+    if (e.code == "KeyS" || e.code == "ArrowDown") moving.down = false
+    if (e.code == "KeyD" || e.code == "ArrowRight") moving.right = false
+  })
+  
   const up = $$("button", {
     down(e) {moving.up = true},
     up(e) {moving.up = false},
