@@ -41,28 +41,87 @@ function main() {
     );
   };
   
+  cam.onMovement = s => s;
+  
   addControls();
 }
 
 function addControls() {
+  const moving = {
+    up: false,
+    left: false,
+    down: false,
+    right: false,
+  };
+  const movementLoop = stopLoop(() => {
+    if(moving.up) cam.moveUp      (0.1);
+    if(moving.left) cam.moveLeft  (0.1);
+    if(moving.down) cam.moveDown  (0.1);
+    if(moving.right) cam.moveRight(0.1);
+  });
+  
+  const controls = $("#ui > #controls");
+  const up = $$("button", {
+    down(e) {moving.up = true},
+    up(e) {moving.up = false},
+    children: "Up",
+  });
+  
+  const right = $$("button", {
+    down(e) {moving.right = true},
+    up(e) {moving.right = false},
+    children: "Right",
+  });
+  
+  const down = $$("button", {
+    down(e) {moving.down = true},
+    up(e) {moving.down = false},
+    children: "Down",
+  });
+  
+  const left = $$("button", {
+    down(e) {moving.left = true},
+    up(e) {moving.left = false},
+    children: "Left",
+  });
+  
+  const interact = $$("button", {
+    children: "Interact",
+  });
+  
+  const inventory = $$("button", {
+    children: "Inventory",
+  });
+  
+  const topRow = $$("div", {
+    attrs: {
+      id: "top-row",
+      style: parseCSS({
+        display: "flex",
+        "flex-direction": "row",
+      }),
+    },
+    children: [interact, up, inventory],
+  });
+  
+  const bottomRow = $$("div", {
+    attrs: {
+      id: "bottom-row",
+      style: parseCSS({
+        display: "flex",
+        "flex-direction": "row",
+      }),
+    },
+    children: [left, down, right],
+  });
+  
   const co = $$("div", {
-    style: parseCSS({
-      position: "relative",
-      border: "2px solid red",
-      width: "100vw",
-      height: "100vh",
-    }),
+    attrs: {
+      id: "gamepad",
+    },
+    children: [topRow, bottomRow],
   });
-  const ch = $$("div", {
-    style: parseCSS({
-      display: "absolute",
-      width: "100px",
-      height: "100px",
-      border: "3px solid green",
-    }),
-  });
-  co.appendChild(ch);
-  $("#ui").appendChild(co);
+  controls.appendChild(co);
 }
 
 export {play};
