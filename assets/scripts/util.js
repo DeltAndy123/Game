@@ -38,7 +38,7 @@ export function $$(name, opts = {}) {
     }
   }
   
-  if(opts.on != undefined) {
+  if(opts.on) {
     if(!Array.isArray(opts.on[0])) {
       el.addEventListener(opts.on[0], opts.on[1]());
     } else {
@@ -47,17 +47,17 @@ export function $$(name, opts = {}) {
     }
   }
   
-  if(opts.up != undefined) 
+  if(opts.up) 
     once(opts.up, func => 
       el.addEventListener("pointerup", func)
     );
   
-  if(opts.down != undefined) 
+  if(opts.down) 
     once(opts.down, func => 
       el.addEventListener("pointerdown", func)
     );
   
-  if(opts.inside != undefined)
+  if(opts.inside)
     once(opts.inside, func => {
       el.addEventListener("pointerup", e => {
         const pos = el.getBoundingClientRect();
@@ -78,7 +78,7 @@ export function $$(name, opts = {}) {
       });
     });
   
-  if(opts.outside != undefined)
+  if(opts.outside)
     once(opts.outside, func => {
       el.addEventListener("pointerup", e => {
         const pos = el.getBoundingClientRect();
@@ -89,7 +89,7 @@ export function $$(name, opts = {}) {
       });
     });
   
-  if(opts.children != undefined) {
+  if(opts.children) {
     once(opts.children, e => {
       if(typeof e == "string") {
         el.appendChild(document.createTextNode(e));
@@ -99,7 +99,7 @@ export function $$(name, opts = {}) {
     });
   }
   
-  if(opts.forEach != undefined) {
+  if(opts.forEach) {
     once(opts.forEach, func => {
       for(let i = 0; i < el.children.length; i++)
         func(el.children[i]);
@@ -203,9 +203,9 @@ export class TilemapText {
       mderr("Didn't recieve an array")
     );
     
-    if(e != undefined) {
+    if(e) {
       this._run(e);
-    } else if(this.opts.run != undefined) {
+    } else if(this.opts.run) {
       this._run(opts.run);
     }
     

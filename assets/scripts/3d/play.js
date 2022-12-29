@@ -1,14 +1,14 @@
-import {stopLoop, stepLoop, $, RADIAN_HALF, clamp, parseCSS, $$} from "../util.js";
-import {loadLevel} from "./levelLoader.js";
-import {newCamera, updateCamera, MovementCamera} 
-from "../3d.js";
-import {setCurrentCam, setCurrentScene, renderLoop} 
-from "./app.js";
-import {settings, settingsObj} from "../settings.js";
+import { stopLoop, stepLoop, $, RADIAN_HALF, clamp, parseCSS, $$ } from "../util.js";
+import { loadLevel } from "./levelLoader.js";
+import { newCamera, updateCamera, MovementCamera }
+  from "../3d.js";
+import { setCurrentCam, setCurrentScene, renderLoop }
+  from "./app.js";
+import { settings, settingsObj } from "../settings.js";
 
 const scene = new THREE.Scene();
 const cam = new MovementCamera({
-  camera: {fov: 80},
+  camera: { fov: 80 },
 });
 /*
 stopLoop(() => {
@@ -31,9 +31,9 @@ function main() {
   setCurrentScene(scene);
   setCurrentCam(cam.camera);
   renderLoop.start();
-  
+
   cam.onPointerMove = function(e) {
-    console.log(e.type)
+    $("#ui > #controls").style.display = "block"
     cam.rx += e.x * 0.005 * settingsObj.sensitivity;
     cam.ry = clamp(
       -Math.PI / 3,
@@ -42,9 +42,6 @@ function main() {
     );
   };
 
-  let prevMouseX = 0;
-  let prevMouseY = 0;
-  
   $("#c").addEventListener('mousemove', function(e) {
     cam.rx += e.movementX * -0.005 * settingsObj.sensitivity;
     cam.ry = clamp(
@@ -52,16 +49,12 @@ function main() {
       cam.ry + e.movementY * -0.005 * settingsObj.sensitivity,
       Math.PI / 3,
     );
-  
-    // Store current mouse position for next time
-    prevMouseX = e.clientX;
-    prevMouseY = e.clientY;
   });
   // Set up pointer lock
   document.addEventListener('click', function(e) {
     $("#c").requestPointerLock();
   });
-  
+
   document.addEventListener('pointerlockchange', function(e) {
     if (document.pointerLockElement === $("#c")) {
       // Pointer lock was acquired
@@ -71,13 +64,13 @@ function main() {
       console.log('Pointer lock lost');
     }
   });
-  
+
   document.addEventListener('pointerlockerror', function(e) {
     console.log('Pointer lock error');
   });
 
   if ($("#c").requestPointerLock) $("#c").requestPointerLock();
-  
+
   // Unlock pointer on escape key press
   document.addEventListener('keydown', function(e) {
     if (e.code === "Escape") {
@@ -85,9 +78,9 @@ function main() {
       document.exitPointerLock();
     }
   });
-  
+
   cam.onMovement = s => s;
-  
+
   addControls();
 }
 
@@ -99,12 +92,12 @@ function addControls() {
     right: false,
   };
   const movementLoop = stopLoop(() => {
-    if(moving.up) cam.moveUp      (0.1);
-    if(moving.left) cam.moveLeft  (0.1);
-    if(moving.down) cam.moveDown  (0.1);
-    if(moving.right) cam.moveRight(0.1);
+    if (moving.up) cam.moveUp(0.1);
+    if (moving.left) cam.moveLeft(0.1);
+    if (moving.down) cam.moveDown(0.1);
+    if (moving.right) cam.moveRight(0.1);
   });
-  
+
   const controls = $("#ui > #controls");
 
   const keyboardDown = document.addEventListener("keydown", (e) => {
@@ -121,39 +114,39 @@ function addControls() {
     if (e.code == "KeyS" || e.code == "ArrowDown") moving.down = false
     if (e.code == "KeyD" || e.code == "ArrowRight") moving.right = false
   })
-  
+
   const up = $$("button", {
-    down(e) {moving.up = true},
-    up(e) {moving.up = false},
+    down(e) { moving.up = true },
+    up(e) { moving.up = false },
     children: "Up",
   });
-  
+
   const right = $$("button", {
-    down(e) {moving.right = true},
-    up(e) {moving.right = false},
+    down(e) { moving.right = true },
+    up(e) { moving.right = false },
     children: "Right",
   });
-  
+
   const down = $$("button", {
-    down(e) {moving.down = true},
-    up(e) {moving.down = false},
+    down(e) { moving.down = true },
+    up(e) { moving.down = false },
     children: "Down",
   });
-  
+
   const left = $$("button", {
-    down(e) {moving.left = true},
-    up(e) {moving.left = false},
+    down(e) { moving.left = true },
+    up(e) { moving.left = false },
     children: "Left",
   });
-  
+
   const interact = $$("button", {
     children: "Interact",
   });
-  
+
   const inventory = $$("button", {
     children: "Inventory",
   });
-  
+
   const topRow = $$("div", {
     attrs: {
       id: "top-row",
@@ -164,7 +157,7 @@ function addControls() {
     },
     children: [interact, up, inventory],
   });
-  
+
   const bottomRow = $$("div", {
     attrs: {
       id: "bottom-row",
@@ -175,7 +168,7 @@ function addControls() {
     },
     children: [left, down, right],
   });
-  
+
   const co = $$("div", {
     attrs: {
       id: "gamepad",
@@ -185,4 +178,4 @@ function addControls() {
   controls.appendChild(co);
 }
 
-export {play};
+export { play };
