@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="A game" />
+    <meta name="keywords" content="game, strategy" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="blue" />
+    
+    <base target="_blank" />
+    <meta name="robots" content= "index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Game" />
+    <meta property="og:description" content="A game that I made" />
+    <meta property="og:image" content="/assets/images/icon.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="manifest" href="/assets/pwa/manifest.json" />
+    <title>Game</title>
+    
+    <link rel="stylesheet" href="/assets/styles/global.css" />
+    <link rel="stylesheet" href="/assets/styles/article.css" />
+    <link rel="stylesheet" href="/assets/styles/game.css" />
+    
+    <script src="assets/scripts/touch.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.min.js" integrity="sha512-Wft1v8e5sfJmolWfOyea3DBsf2qHZv6uBKLkvEYNSUo0wImWa9DYZH1lHU5y/UIfQu4xJ3xahqv1X4pvx3cv/w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="assets/scripts/game.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <noscript>
+        <article class="error">
+          <h1>Javascript is Disabled</h1>
+          <p>
+            Javascript is disabled in your browser.
+            Here is how you can turn it on: 
+            <a href="https://enable-javascript.com">Click Here</a>
+          </p>
+        </article>
+      </noscript>
+      <main>
+        <canvas id="c">
+          <article class="error">
+            <h1>You Device Doesn't Support This Game</h1>
+            <p>
+              Your device can't run this game. Try playing
+              this game in fullscreen and try switching to
+              Chrome, Safari, or Firefox as a browser. If
+              that doesn't work, try updating your browser
+              and device.
+            </p>
+            <p class="info">
+              For more technical details, your device doesn't
+              support the <code>&ltcanvas&gt</code> element
+            </p>
+          </article>
+        </canvas>
+        <div id="ui">
+          <div id="page"></div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

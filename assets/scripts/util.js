@@ -169,11 +169,11 @@ export function stepLoop(f) {
   return step();
 }
 
-export function rand(o = {}) {
+export function rand(o) {
   return Math.floor(Math.random() * (o - 1));
 }
 
-export function randMax() {
+export function randMax(o = {min: 0}) {
   return Math.floor(Math.random() * (o.max - 1)) + o.min;
 }
 

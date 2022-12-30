@@ -41,8 +41,13 @@ function main() {
       Math.PI / 3,
     );
   };
+  
+  addMouseControls();
+  addControls();
+}
 
-  $("#c").addEventListener('mousemove', function(e) {
+function addMouseControls() {
+  $("#c").addEventListener("mousemove", e => {
     cam.rx += e.movementX * -0.005 * settingsObj.sensitivity;
     cam.ry = clamp(
       -Math.PI / 3,
@@ -51,37 +56,32 @@ function main() {
     );
   });
   // Set up pointer lock
-  document.addEventListener('click', function(e) {
-    $("#c").requestPointerLock();
-  });
+  document.addEventListener("click", e =>
+    $("#c").requestPointerLock()
+  );
 
-  document.addEventListener('pointerlockchange', function(e) {
+  document.addEventListener("pointerlockchange", e => {
     if (document.pointerLockElement === $("#c")) {
       // Pointer lock was acquired
-      console.log('Pointer lock acquired');
+      console.log("Pointer lock acquired");
     } else {
       // Pointer lock was lost
-      console.log('Pointer lock lost');
+      console.log("Pointer lock lost");
     }
   });
 
-  document.addEventListener('pointerlockerror', function(e) {
-    console.log('Pointer lock error');
-  });
+  document.addEventListener("pointerlockerror", e =>
+    console.log("Pointer lock error")
+  );
 
-  if ($("#c").requestPointerLock) $("#c").requestPointerLock();
+  if($("#c").requestPointerLock) $("#c").requestPointerLock();
 
   // Unlock pointer on escape key press
-  document.addEventListener('keydown', function(e) {
-    if (e.code === "Escape") {
+  document.addEventListener("keydown", e => {
+    if (e.code === "Escape")
       // Escape key was pressed
       document.exitPointerLock();
-    }
   });
-
-  cam.onMovement = s => s;
-
-  addControls();
 }
 
 function addControls() {
@@ -91,28 +91,38 @@ function addControls() {
     down: false,
     right: false,
   };
+  
   const movementLoop = stopLoop(() => {
     if (moving.up) cam.moveUp(0.1);
     if (moving.left) cam.moveLeft(0.1);
     if (moving.down) cam.moveDown(0.1);
     if (moving.right) cam.moveRight(0.1);
   });
-
+  
   const controls = $("#ui > #controls");
-
+  // nice job
+  // I'll fix the PWA manifest.json
+  // ok
   const keyboardDown = document.addEventListener("keydown", (e) => {
-    controls.style.display = "none"
-    if (e.code == "KeyW" || e.code == "ArrowUp") moving.up = true
-    if (e.code == "KeyA" || e.code == "ArrowLeft") moving.left = true
-    if (e.code == "KeyS" || e.code == "ArrowDown") moving.down = true
-    if (e.code == "KeyD" || e.code == "ArrowRight") moving.right = true
+    controls.style.display = "none";
+    if (e.code == "KeyW" || e.code == "ArrowUp") moving.up = true;
+    if (e.code == "KeyA" || e.code == "ArrowLeft") moving.left = true;
+    if (e.code == "KeyS" || e.code == "ArrowDown") moving.down = true;
+    if (e.code == "KeyD" || e.code == "ArrowRight") moving.right = true;
   })
 
   const keyboardUp = document.addEventListener("keyup", (e) => {
-    if (e.code == "KeyW" || e.code == "ArrowUp") moving.up = false
-    if (e.code == "KeyA" || e.code == "ArrowLeft") moving.left = false
-    if (e.code == "KeyS" || e.code == "ArrowDown") moving.down = false
-    if (e.code == "KeyD" || e.code == "ArrowRight") moving.right = false
+    // NO SEMICOLONS?????
+    // ok, fixed
+    // should I put ( ) around "e"?
+    // or do you like it as e => {} better
+    // ok
+    // I usually use with the ()
+    
+    if (e.code == "KeyW" || e.code == "ArrowUp") moving.up = false;
+    if (e.code == "KeyA" || e.code == "ArrowLeft") moving.left = false;
+    if (e.code == "KeyS" || e.code == "ArrowDown") moving.down = false;
+    if (e.code == "KeyD" || e.code == "ArrowRight") moving.right = false;
   })
 
   const up = $$("button", {

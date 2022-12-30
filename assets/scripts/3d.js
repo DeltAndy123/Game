@@ -141,7 +141,7 @@ export class MovementCamera extends ControlCamera {
     super(o);
   }
 
-  onMovement = function(s) { return s };
+  onMovement = function(s) {return s};
 
   // moveUp(s = 0.03) {
   //   s = this.onMovement(s);
@@ -155,14 +155,15 @@ export class MovementCamera extends ControlCamera {
   // }
 
   moveUp(s = 0.03) {
-    const forward = this.camera.getWorldDirection(new THREE.Vector3(0, 0, -1))
-    this.camera.translateZ((2 - Math.cos(forward.y)) * (-s))
-    this.camera.position.y = 0
+    const forward = 
+    this.camera.getWorldDirection(new THREE.Vector3(0, 0, -1))
+    this.camera.translateZ((2 - Math.cos(forward.y)) * (-s));
+    this.camera.position.y = 0;
   }
 
   moveLeft(s = 0.03) {
     s = this.onMovement(s);
-    this.camera.translateX(-s)
+    this.camera.translateX(-s);
   }
 
   moveDown(s = 0.03) {
@@ -171,6 +172,6 @@ export class MovementCamera extends ControlCamera {
 
   moveRight(s = 0.03) {
     s = this.onMovement(s);
-    this.camera.translateX(s)
+    this.camera.translateX(s);
   }
 }
