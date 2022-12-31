@@ -2,7 +2,7 @@ export const RADIAN_HALF = 1.570796;
 
 export function noop() {}
 
-export function $(e) {return document.querySelector(e)}
+export function $(selector, element = document) {return element.querySelector(selector)}
 
 export function mderr(e = "") {
   return new Error("MD Error: " + e);

@@ -19,6 +19,36 @@ function toggleTheme(theme) {
   }
 }
 
+const mobile = window.matchMedia('(max-width: 767px)')
+
+var menuShown = false
+
+function menu(show) {
+  if (!mobile.matches) return
+  const sidebar = $(".sidebar")
+  // const main = $("main")
+  if ((menuShown || show == false) && show != true) {
+    sidebar.style.display = "none";
+    // main.style.display = "block";
+  } else {
+    sidebar.style.display = "block";
+    // main.style.display = "none";
+  }
+  menuShown = !menuShown
+}
+
+mobile.onchange = (e) => {
+  if (!e.matches) {
+    $(".sidebar").style.display = "block";
+  } else {
+    $(".sidebar").style.display = "none";
+  }
+}
+
+function disableMenu() {
+  menu(false)
+}
+
 const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 function checkSystemDark(query) {
@@ -42,6 +72,7 @@ async function scrollToSection(section) {
   if (!element) return 'NOSECTION'
   await new Promise(resolve => setTimeout(resolve, 1))
   window.scrollTo({ top: (element.offsetTop - 75), behavior: "smooth" })
+  disableMenu()
 }
 
 function changeHashWithoutScrolling(hash) {
@@ -79,19 +110,23 @@ window.onload = () => {
   checkSystemDark(systemDark)
 
   $("#theme-button").addEventListener("click", toggleTheme);
+  // $("#theme-button").addEventListener("touchstart", toggleTheme);
+
+  $("#menu-button").addEventListener("click", menu);
+  // $("#menu-button").addEventListener("touchstart", menu);
+
+  $("main").addEventListener("touchstart", disableMenu)
+  $("main").addEventListener("click", disableMenu)
   
   const btns = document.querySelectorAll("[data-copytext]");
   for(let i = 0; i < btns.length; i++) {
     btns[i].onpointerup = function() {
-      // YAY, IT COPIES THE TEXT
       navigator.clipboard.writeText(
-        "https://game.deltandy123.repl.co/index.html#"
-      + btns[i].id
+        window.location.href.replace(/#.*$/, '')
+        +'#'
+        + btns[i].id
       ).then(() => alert("Copied!"))
       .catch(e => alert("Couldn't copy"));
-      // bruh
-      // ok thanks
-      // https://game.deltandy123.repl.co/index.html#util.js
     };
   }
 }

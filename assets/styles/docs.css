@@ -22,7 +22,7 @@ body.theme-dark {
   height: 100%;
 }
 
-#theme-button {
+.button {
   display: inline-block;
   font-size: 20px;
   padding: 8px 14px;
@@ -30,9 +30,13 @@ body.theme-dark {
   height: 100%;
   transform: translateY(1px);
 }
-#theme-button:hover {
+.button:hover {
   background-color: rgba(0, 0, 0, 0.35);
   cursor: pointer;
+}
+
+#menu-button {
+  display: none;
 }
 
 header {
@@ -105,6 +109,7 @@ right {
 main {
   margin-top: 125px;
   margin-left: 200px;
+  display: block;
 }
 
 .file {
@@ -178,7 +183,30 @@ body.theme-dark .file code {
   border-color: #3f3f3f;
 }
 
+.file > .description {
+  color: #4f4f4f;
+  margin-left: 25px;
+}
+
+body.theme-dark .file > .description {
+  color: #d1d1d1
+}
+
+.file > h2 {
+  margin-left: 25px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 @media (max-width: 767px) {
+  /* Mobile */
+  .sidebar {
+    display: none;
+  }
+  main {
+    width: 100vw;
+    margin-left: 0;
+  }
   header left {
     display: none;
   }
@@ -186,17 +214,12 @@ body.theme-dark .file code {
     width: 100%;
   }
   .search-bar {
-    width: 75%;
+    width: 65%;
   }
-}
-
-@media (max-width: 500px) {
-  /* mobile support */
-  .sidebar {
-    display: none;
+  #menu-button {
+    display: inline-block;
   }
-  main {
-    width: 100vw;
-    margin-left: 0;
+  .button {
+    background-color: rgba(0, 0, 0, 0.15);
   }
 }
