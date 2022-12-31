@@ -1,12 +1,9 @@
 import {$, $$, addToGame, parseCSS} from "./util.js";
-import {play} from "./3d/play.js";
+import {play} from "./play.js";
 import {settings} from "./settings.js";
-import {inDevEl} from "./in-dev.js";
-
-var menu;
 
 function main() {
-  menu = $$("div", {
+  const menu = $$("div", {
     attrs: {style: parseCSS({
       color: "white",
       display: "flex",
@@ -25,19 +22,14 @@ function main() {
         "border-radius": "5px",
         color: "black",
         "font-size": "1.5rem",
-        "background": "linear-gradient(45deg, silver, white)",
+        "background-color": "silver",
         border: "1px solid white",
-        "pointer-events": "auto",
       });
       e.setAttribute("class", "down");
-      e.addEventListener("pointerup", e => {
-        menu.style.display = "none";
-      });
     },
     children: [
       $$("button", {
         children: "Play",
-        //up() {inDevEl.style.display = "flex"},
         up: play,
       }),
       $$("button", {
@@ -50,4 +42,4 @@ function main() {
   addToGame(menu, "page");
 }
 
-export {main, menu};
+export {main};

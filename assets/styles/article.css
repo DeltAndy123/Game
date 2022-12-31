@@ -15,4 +15,8 @@ code {
   padding: 3px;
 }
 
+body.theme-dark code {
+  background-color: #292929;
+}
+
 main {display: none}

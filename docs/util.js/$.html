@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="description" content="API docs" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="blue" />
+
+  <base target="_blank" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Docs" />
+  <meta property="og:description" content="API docs" />
+  <meta property="og:image" content="/assets/images/icon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="manifest" href="/assets/pwa/manifest.json" />
+  <title>API Docs</title>
+
+  <link rel="stylesheet" href="/assets/styles/global.css" />
+  <link rel="stylesheet" href="/assets/styles/article.css" />
+
+  <link rel="stylesheet" href="/assets/styles/docs.css" />
+
+<!--   <script src="assets/scripts/touch.js"></script> -->
+
+  <script src="/assets/scripts/docs.js"></script>
+
+  <script src="https://kit.fontawesome.com/a3560bbd50.js" crossorigin="anonymous"></script>
+</head>
+
+<body data-theme="light">
+  <div id="app">
+    <header>
+      <left>
+        <h3>Documentation</h3>
+      </left>
+
+      <right>
+        <div class="button" id="menu-button">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="button" id="theme-button">
+          <i class="fa-solid fa-moon"></i>
+        </div>
+        <div class="round-border-big search-bar"><i class="fa-solid fa-magnifying-glass"></i> &nbsp;Search</div>
+      </right>
+    </header>
+    <div class="sidebar">
+      <h2>Functions</h2>
+      <br/>
+      <nav>
+        <ul>
+          <li><b><a href="#util.js" target="_self">util.js</a></b></li>
+          <li><a href="#$" target="_self">$</a></li>
+          <li><a href="#noop" target="_self">noop</a></li>
+          <li><a href="#mderr" target="_self">mderr</a></li>
+          <li><a href="#check-el" target="_self">checkEl</a></li>
+          <li><a href="#once" target="_self">once</a></li>
+          <li><a href="#$$" target="_self">$$</a></li>
+          <li><a href="#add-to-game" target="_self">addToGame</a></li>
+          <li><a href="#parseCSS" target="_self">parseCSS</a></li>
+          <li><a href="#event-once" target="_self">event-once</a></li>
+          <li><a href="#stop-loop" target="_self">stopLoop</a></li>
+          <li><a href="#step-loop" target="_self">stepLoop</a></li>
+          <li><a href="#rand" target="_self">rand</a></li>
+          <li><a href="#rand-max" target="_self">randMax</a></li>
+          <li><a href="#rand-from-arr" target="_self">randFromArr</a></li>
+        </ul>
+      </nav>
+    </div>
+    <noscript>
+      <article class="error">
+        <h1>Javascript is Disabled</h1>
+        <p>
+          Javascript is disabled in your browser.
+          Here is how you can turn it on:
+          <a href="https://enable-javascript.com">Click Here</a>
+        </p>
+      </article>
+    </noscript>
+    <main>
+      <div class="file" id="Util">
+        <div class="row">
+          <div id="$" data-copytext="true" class="link"><i class="fa-solid fa-link link"></i></div>
+          <h1>$</h1>
+        </div>
+        <br/>
+        <p class="description">Gets an element from a CSS selector</p>
+        <br/>
+        <h2>Parameters</h2>
+        <div class="method" id="$">
+          <div class="row">
+            <div id="$" data-copytext="true" class="link"><i class="fa-solid fa-link"></i></div>
+            <h1>selector</h1>
+          </div>
+          <code>$(selector: CSS selector): HTMLElement</code>
+          <p>
+            <span class="args">selector: </span>The CSS selector that
+            gets your specified element
+          </p>
+          <p>
+            This function returns elements from
+            a CSS selector
+          </p>
+        </div>
+        
+        <div class="method" id="noop">
+          <div class="row">
+            <div id="noop" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>noop</h1>
+          </div>
+          <code>noop( ): void</code>
+          <p>
+            A function that doesn't do anything
+          </p>
+        </div>
+        
+        <div class="method" id="mderr">
+          <div class="row">
+            <div id="mderr" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>mderr</h1>
+          </div>
+          <code>mderr( message: string ): string</code>
+          <p>
+            <span class="args">message: </span>
+            The error message
+          </p>
+          <p>
+            A function that outputs an error
+          </p>
+        </div>
+        
+        <div class="method" id="check-el">
+          <div class="row">
+            <div id="check-el" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>checkEl</h1>
+          </div>
+          <code>checkEl( element: HTMLElement ): HTMLElement</code>
+          <p>
+            <span class="args">element: </span>
+            The element to check its existence
+          </p>
+          <p>
+            A function that checks if an element is
+            undefined and returns it
+          </p>
+        </div>
+        
+        <div class="method" id="once">
+          <div class="row">
+            <div id="once" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>once</h1>
+          </div>
+          <code>once( (List: array&lt;function&gt;, Function: function) ): void</code>
+          <p>
+            <span class="args">List: </span>
+            The array to iterate through and run the functions inside
+          </p>
+          <p>
+            <span class="args">Function: </span>
+            The function to run
+          </p>
+          <p>
+            A function runs an array of function or
+            just runs a function depending on the type
+          </p>
+        </div>
+        
+        <div class="method" id="$$">
+          <div class="row">
+            <div id="$$" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>$$</h1>
+          </div>
+          <code>$$( name: string, opts: object ): HTMLElement</code>
+          <p>
+            <span class="args">name: </span>
+            The name of the HTML element to create
+          </p>
+          <p>
+            <span class="args">opts: </span>
+            The options for the element. The options are: 
+            attrs, on, up, down, inside, outside, children, 
+            and forEach
+          </p>
+          
+          <p>
+            Creates an element
+          </p>
+        </div>
+        
+        <div class="method" id="add-to-game">
+          <div class="row">
+            <div id="add-to-game" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>addToGame</h1>
+          </div>
+          <code>addToGame( div: HTMLDivElement, child: HTMLElement ): void</code>
+          <p>
+            <span class="args">div: </span>
+            The element to append to in the ui
+          </p>
+          <p>
+            <span class="args">child: </span>
+            The element that gets appened
+          </p>
+          
+          <p>
+            [probably deprecated]. A shortcut to adding 
+            something to the ui
+          </p>
+        </div>
+        
+        <div class="method" id="parseCSS">
+          <div class="row">
+            <div id="parseCSS" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>parseCSS</h1>
+          </div>
+          <code>parseCSS( css: object ): string</code>
+          <p>
+            <span class="args">css: </span>
+            The object to parse into a string that can
+            be used as inline CSS
+          </p>
+          
+          <p>
+            Creates an element
+          </p>
+        </div>
+        
+        <div class="method" id="event-once">
+          <div class="row">
+            <div id="event-once" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>eventOnce</h1>
+          </div>
+          <code>eventOnce( event: string, listener: function ): void</code>
+          <p>
+            <span class="args">event: </span>
+            The event to listen to
+          </p>
+          <p>
+            <span class="args">listener: </span>
+            The function to use as a listener
+          </p>
+          
+          <p>
+            Runs a function and adds it as a listener at the
+            same time
+          </p>
+        </div>
+        
+        <div class="method" id="stop-loop">
+          <div class="row">
+            <div id="stop-loop" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>stopLoop</h1>
+          </div>
+          <code>stopLoop( loop: function, firstTick: boolean, delta: boolean ): object&lt;start: function, stop: function, step: function&gt;</code>
+          <p>
+            <span class="args">loop: </span>
+            The function to run as the loop
+          </p>
+          <p>
+            <span class="args">firstTick: </span>
+            Determines whether to run this in the first tick
+            (default to true)
+          </p>
+          <p>
+            <span class="args">delta: </span>
+            Determines whether it should add delta time as an argument
+            (default to false)
+          <p>
+            Runs a loop using requestAnimationFrame that can be
+            easily stopped or continued
+          </p>
+          <p>
+            Returns an object with start, stop, and step.
+            "Start" makes the loop continue if it was stopped.
+            "Stop" stops the loops if it was running.
+            "Step" runs 1 tick of the function while it is stopped
+          </p>
+        </div>
+        
+        <div class="method" id="step-loop">
+          <div class="row">
+            <div id="event-once" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>stepLoop</h1>
+          </div>
+          <code>stepLoop( f: function ): stepLoop</code>
+          <p>
+            <span class="args">f: </span>
+            The function to run as a curry function
+          </p>
+          
+          <p>
+            Runs a function as a recursive curry function
+          </p>
+        </div>
+        
+        <div class="method" id="rand">
+          <div class="row">
+            <div id="rand" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>rand</h1>
+          </div>
+          <code>rand( max: positive int ): positive int</code>
+          <p>
+            <span class="args">max: </span>
+            The max limit for the random number generator
+          </p>
+          
+          <p>
+            A random number generator
+          </p>
+        </div>
+        
+        <div class="method" id="rand-max">
+          <div class="row">
+            <div id="rand-max" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>randMax</h1>
+          </div>
+          <code>randMax( obj: object&lt;min: positive int, max: positive int&gt; ): positive int</code>
+          <p>
+            <span class="args">obj.max: </span>
+            The max limit for the random number generator
+          </p>
+          <p>
+            <span class="args">obj.min: </span>
+            The minimum limit for the random number generator
+          </p>
+          
+          <p>
+            A random number generator
+          </p>
+        </div>
+        
+        <div class="method" id="rand-from-arr">
+          <div class="row">
+            <div id="rand-from-arr" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>randFromArr</h1>
+          </div>
+          <code>randFromArr( arr: array ): item in arr</code>
+          <p>
+            <span class="args">arr: </span>
+            The array to choose a random item from
+          </p>
+          
+          <p>
+            A function that chooses a random item from an array
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
