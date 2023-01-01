@@ -5,6 +5,8 @@ import {inDevEl} from "./in-dev.js";
 
 var menu;
 
+$("#message").style.display = "none";
+
 function main() {
   menu = $$("div", {
     attrs: {style: parseCSS({

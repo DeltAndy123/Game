@@ -1,6 +1,6 @@
 import {stopLoop, stepLoop, $, RADIAN_HALF, clamp, parseCSS, $$} from "../util.js";
 import {loadLevel} from "./levelLoader.js";
-import {newCamera, updateCamera, MovementCamera} 
+import {newCamera, updateCamera, MovementCamera, message} 
 from "../3d.js";
 import {setCurrentCam, setCurrentScene, renderLoop} 
 from "./app.js";
@@ -153,9 +153,14 @@ function addMouseControls() {
   
   $("#c").onmousemove = mousemove;
 
+  var unlocked;
+
   if ($("#c").requestPointerLock) $("#c").requestPointerLock();
 
   document.addEventListener("click", (e) => {
+    if ((Date.now() - unlocked) < 1000) {
+      message.show("Cannot lock cursor too fast", "warning", 1000);
+    }
     $("#c").requestPointerLock()
   });
 
@@ -163,9 +168,11 @@ function addMouseControls() {
     if (document.pointerLockElement == $("#c")) {
       // Pointer locked
       $("#c").onmousemove = mousemove;
+      if (message.get() = "Cannot lock cursor too fast") message.hide();
     } else {
       // Pointer unlocked
       $("#c").onmousemove = null;
+      unlocked = Date.now()
     }
   })
 }

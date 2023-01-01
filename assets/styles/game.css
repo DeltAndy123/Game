@@ -90,3 +90,15 @@
   position: absolute;
   touch-action: none;
 }
+
+#message {
+  color: white;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 5px;
+  width: 50%;
+  height: 10%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
