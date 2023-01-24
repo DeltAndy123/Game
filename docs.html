@@ -27,7 +27,7 @@
 
 <!--   <script src="assets/scripts/touch.js"></script> -->
 
-  <script src="/assets/scripts/docs.js"></script>
+  <script src="assets/scripts/docs.js"></script>
 
   <script src="https://kit.fontawesome.com/a3560bbd50.js" crossorigin="anonymous"></script>
 </head>
@@ -284,15 +284,22 @@
             <span class="args">delta: </span>
             Determines whether it should add delta time as an argument
             (default to false)
+          </p>
+          <p>
+            <span class="args">.start(): </span>
+            Continues the loop if it was paused
+          </p>
+          <p>
+            <span class="args">.stop(): </span>
+            Stops the loop
+          </p>
+          <p>
+            <span class="args">.step(): </span>
+            Runs one tick of the loop while it's stopped
+          </p>
           <p>
             Runs a loop using requestAnimationFrame that can be
             easily stopped or continued
-          </p>
-          <p>
-            Returns an object with start, stop, and step.
-            "Start" makes the loop continue if it was stopped.
-            "Stop" stops the loops if it was running.
-            "Step" runs 1 tick of the function while it is stopped
           </p>
         </div>
         
@@ -371,6 +378,192 @@
             A function that chooses a random item from an array
           </p>
         </div>
+        
+        <div class="method" id="clamp">
+          <div class="row">
+            <div id="clamp" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>clamp</h1>
+          </div>
+          <code>clamp( min: number, num: number, max: number ): number</code>
+          <p>
+            <span class="args">min: </span>
+            The minimum
+          </p>
+          <p>
+            <span class="args">num: </span>
+            The number to clamp
+          </p>
+          <p>
+            <span class="args">max: </span>
+            The maximum
+          </p>
+          
+          <p>
+            Sets a minimum and a maximum for a number
+          </p>
+        </div>
+        
+        <div class="method" id="random-color">
+          <div class="row">
+            <div id="random-color" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>randomColor</h1>
+          </div>
+          <code>randomColor( ): positive int</code>
+          <p>
+            A function that gives you a random color
+            in the form of hexadecimal
+          </p>
+        </div>
+        
+        <div class="method" id="tilemap-text">
+          <div class="row">
+            <div id="tilemap-text" data-copytext="true" class="link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <h1>TilemapText</h1>
+          </div>
+          <code>new TilemapText( opts: object )</code>
+          <p>
+            <span class="args">opts.delay: </span>
+            The delay of the level generator
+          </p>
+          <p>
+            <span class="args">.run( arr: array ): </span>
+            Iterates through a file and generates a level
+          </p>
+          <p>
+            <span class="args">.use( f: function ): </span>
+            Uses middleware that will run each time the
+            iterator iterates through a character
+          </p>
+          <p>
+            <span class="args">.runPre( o: function ): </span>
+            An internal function that runs through all
+            the middleware
+          </p>
+          <p>
+            <span class="args">.run( arr: array ): </span>
+            Iterates through a file and generates a level
+          </p>
+          <p>
+            <span class="args">.key( c: char, f: function ): </span>
+            Adds a key to the iterator. Everytime it finds a
+            character matching thr key in the array it runs,
+            it will run your function
+          </p>
+          <p>
+            <span class="args">.check( e ): </span>
+            An internal function that checks if a character
+            matches your defined character
+          </p>
+          <p>
+            <span class="args">.finished( f: function ): </span>
+            Runs a function when finsished
+          </p>
+          <p>
+            <span class="args">._run( e: array ): </span>
+            An internal function that acts as the iterator
+          </p>
+          
+          <p>
+            A class that is used to generate levels from arrays
+          </p>
+        </div>
+      </div> <!-- end of file -->
+      
+      <div class="file" id="3d">
+        <div class="row">
+          <div id="3d.js" data-copytext="true" class="link"><i class="fa-solid fa-link link"></i></div>
+          <h1>3d.js</h1>
+        </div>
+        
+        <div class="method" id="new-box">
+          <div class="row">
+            <div id="new-box" data-copytext="true" class="link"><i class="fa-solid fa-link"></i></div>
+            <h1>newBox</h1>
+          </div>
+          <code>newBox( size: positive int, color: hexadecimal ): BoxMesh</code>
+          <p>
+            <span class="args">size: </span>
+            The size of the box
+          </p>
+          <p>
+            <span class="args">color: </span>
+            The color of the box
+          </p>
+          <p>
+            Returns a new BoxMesh to be used as a box
+          </p>
+        </div>
+        <div class="method" id="set-quaternion">
+          <div class="row">
+            <div id="new-box" data-copytext="true" class="link"><i class="fa-solid fa-link"></i></div>
+            <h1>setQuaternion</h1>
+          </div>
+          <code>setQuaternion( mathX: positive int, mathY: positive int ): object&lt;qx: quaternion, qy: quaternion&gt;</code>
+          <p>
+            <span class="args">mathX: </span>
+            The raw x-rotation of the quaternion
+          </p>
+          <p>
+            <span class="args">mathY: </span>
+            The raw y-rotation of the quaternion
+          </p>
+          <p>
+            Returns a quaternion for x-rotation and y-rotation
+          </p>
+        </div>
+        <div class="method" id="update-camera">
+          <div class="row">
+            <div id="update-camera" data-copytext="true" class="link"><i class="fa-solid fa-link"></i></div>
+            <h1>updateCamera</h1>
+          </div>
+          <code>updateCamera( cam: PerspectiveCamera, mathX: quaternion, mathY: quaternion ): void</code>
+          <p>
+            <span class="args">cam: </span>
+            The camera to update rotation
+          </p>
+          <p>
+            <span class="args">mathX: </span>
+            The raw x-rotation of the quaternion
+          </p>
+          <p>
+            <span class="args">mathY: </span>
+            The raw y-rotation of the quaternion
+          </p>
+          <p>
+            Sets the camera rotation from a quaternion
+          </p>
+        </div>
+        <div class="method" id="control-camera">
+          <div class="row">
+            <div id="control-camera" data-copytext="true" class="link"><i class="fa-solid fa-link"></i></div>
+            <h1>ControlCamera</h1>
+          </div>
+          <code>new ControlCamera( o: object ): void</code>
+          <p>
+            <span class="args">o: </span>
+            The options for the Perspective Camera.
+            (see <a href="https://threejs.org/docs/index.html?q=persp#api/en/cameras/PerspectiveCamera">Three.js docs</a>)
+          </p>
+          <p>
+            <span class="args">.bind( e: HTMLElement ): self</span>
+            Binds the camera rotation to an HTML element
+          </p>
+          <p>
+            <span class="args">.onPointerMove( ): void</span>
+            An empty function that can be defined to control
+            rotation
+          </p>
+          <p>
+            Returns an enhanced camera with rotation
+          </p>
+        </div>
+        
       </div>
     </main>
   </div>

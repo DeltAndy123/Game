@@ -18,6 +18,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  pointer-events: none;
 }
 
 #ui > * {
@@ -26,5 +27,78 @@
 }
 
 #ui .down:active {
-  filter: invert(50%);
+  filter: invert(30%);
+  color: white;
+}
+
+#ui .slider {
+  overflow: hidden;
+  border: 8px inset gray;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(45deg, silver, gray);
+  width: 15px;
+  height: 15px;
+}
+
+#ui .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(45deg, silver, gray);
+  border-radius: 15px;
+  cursor: pointer;
+  border: 1px solid white;
+  box-shadow: -2015px 0 0 2000px #00fd0a;
+}
+
+#ui .slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(180deg, silver, gray);
+  border: 1px solid white;
+  cursor: pointer;
+  box-shadow: -2015px 0 0 2000px #00fd0a;
+}
+
+#ui #settings .left {font-size: 0.75em}
+
+#ui #settings .right {
+  width: 65%;
+  height: 100%;
+  padding: 20px;
+}
+
+#ui #settings .left {margin: auto}
+
+#ui #settings button {
+  border: 2px outset silver;
+  background-color: white;
+  color: black;
+}
+
+#ui .every-full * {
+  width: 100%;
+  height: 100%;
+}
+
+#controls {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  touch-action: none;
+}
+
+#message {
+  color: white;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 5px;
+  width: 50%;
+  height: 10%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
 }

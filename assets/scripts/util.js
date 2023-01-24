@@ -2,7 +2,7 @@ export const RADIAN_HALF = 1.570796;
 
 export function noop() {}
 
-export function $(selector, element = document) {return element.querySelector(selector)}
+export function $(e) {return document.querySelector(e)}
 
 export function mderr(e = "") {
   return new Error("MD Error: " + e);
@@ -38,7 +38,7 @@ export function $$(name, opts = {}) {
     }
   }
   
-  if(opts.on) {
+  if(opts.on != undefined) {
     if(!Array.isArray(opts.on[0])) {
       el.addEventListener(opts.on[0], opts.on[1]());
     } else {
@@ -47,17 +47,17 @@ export function $$(name, opts = {}) {
     }
   }
   
-  if(opts.up) 
+  if(opts.up != undefined) 
     once(opts.up, func => 
       el.addEventListener("pointerup", func)
     );
   
-  if(opts.down) 
+  if(opts.down != undefined) 
     once(opts.down, func => 
       el.addEventListener("pointerdown", func)
     );
   
-  if(opts.inside)
+  if(opts.inside != undefined)
     once(opts.inside, func => {
       el.addEventListener("pointerup", e => {
         const pos = el.getBoundingClientRect();
@@ -78,7 +78,7 @@ export function $$(name, opts = {}) {
       });
     });
   
-  if(opts.outside)
+  if(opts.outside != undefined)
     once(opts.outside, func => {
       el.addEventListener("pointerup", e => {
         const pos = el.getBoundingClientRect();
@@ -89,7 +89,7 @@ export function $$(name, opts = {}) {
       });
     });
   
-  if(opts.children) {
+  if(opts.children != undefined) {
     once(opts.children, e => {
       if(typeof e == "string") {
         el.appendChild(document.createTextNode(e));
@@ -99,7 +99,7 @@ export function $$(name, opts = {}) {
     });
   }
   
-  if(opts.forEach) {
+  if(opts.forEach != undefined) {
     once(opts.forEach, func => {
       for(let i = 0; i < el.children.length; i++)
         func(el.children[i]);
@@ -169,11 +169,11 @@ export function stepLoop(f) {
   return step();
 }
 
-export function rand(o) {
+export function rand(o = {}) {
   return Math.floor(Math.random() * (o - 1));
 }
 
-export function randMax(o = {min: 0}) {
+export function randMax() {
   return Math.floor(Math.random() * (o.max - 1)) + o.min;
 }
 
@@ -203,9 +203,9 @@ export class TilemapText {
       mderr("Didn't recieve an array")
     );
     
-    if(e) {
+    if(e != undefined) {
       this._run(e);
-    } else if(this.opts.run) {
+    } else if(this.opts.run != undefined) {
       this._run(opts.run);
     }
     
