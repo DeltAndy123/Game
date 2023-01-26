@@ -115,8 +115,7 @@ export class ControlCamera {
     this.el.addEventListener("touchmove", 
       e => this.move(e.touches[e.touches.length-1]),
     );
-    //this.el.addEventListener("touchmove", e => {console.log(e.touches);})
-    this.el.addEventListener("mousemove", e => this.down(e))
+    this.el.addEventListener("touchmove", e => {console.log(e.touches[e.touches.length-1]);})
     this.el.addEventListener("pointerup", e => this.up(e));
     return this;
   }

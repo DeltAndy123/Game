@@ -51,5 +51,8 @@ function main() {
   
   addToGame(menu, "page");
 }
-
+/*
+function menu() {}
+function main() {}
+*/
 export {main, menu};

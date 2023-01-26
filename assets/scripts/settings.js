@@ -202,4 +202,9 @@ function settings() {
   settingsEl.style.display = "block";
 }
 
+/*
+function settings() {}
+const settingsObj = {};
+*/
+
 export {settings, settingsObj};

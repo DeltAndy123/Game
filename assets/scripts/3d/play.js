@@ -1,4 +1,5 @@
-import {stopLoop, stepLoop, $, RADIAN_HALF, clamp, parseCSS, $$} from "../util.js";
+import {stopLoop, stepLoop, $, RADIAN_HALF, clamp, parseCSS, $$} 
+from "../util.js";
 import {loadLevel} from "./levelLoader.js";
 import {newCamera, updateCamera, MovementCamera, message} 
 from "../3d.js";
@@ -10,11 +11,6 @@ const scene = new THREE.Scene();
 const cam = new MovementCamera({
   camera: {fov: 80},
 });
-/*
-stopLoop(() => {
-  cam.moveUp();
-});
-*/
 
 function play() {
   loadLevel({
@@ -23,6 +19,8 @@ function play() {
     camera: cam.camera,
   }).then(main);
 }
+
+//function play() {}
 
 function main() {
   cam.bind($("#c"));
@@ -140,22 +138,31 @@ function addMobileControls() {
   })
 }
 
+
+
 function addMouseControls() {
 
-  const mousemove = (e) => {
+  function mousemove(e) {
     cam.rx += e.movementX * -0.005 * settingsObj.sensitivity;
     cam.ry = clamp(
       -Math.PI / 3,
       cam.ry + e.movementY * -0.005 * settingsObj.sensitivity,
       Math.PI / 3,
-    )
+    );
   }
   
   $("#c").onmousemove = mousemove;
 
   var unlocked;
-
-  if ($("#c").requestPointerLock) $("#c").requestPointerLock();
+  
+  // temporarily disabled
+  /*if($("#c").requestPointerLock) {
+    try {
+      $("#c").requestPointerLock();
+    } catch(err) {
+      console.error("Pls fix this @addMouseControls(): " + err);
+    }
+  }*/
 
   document.addEventListener("click", (e) => {
     if ((Date.now() - unlocked) < 1000) {
